@@ -3,12 +3,9 @@ module.exports = {
   env: { browser: true, es2020: true },
   "settings": {
   "import/resolver": {
-    "node": {
-      "extensions": [
-        ".js",
-        ".tsx"
-      ]
-    }
+   "typescript": {
+    "project": ["tsconfig.app.json"]
+   }
   }
 },
   extends: [

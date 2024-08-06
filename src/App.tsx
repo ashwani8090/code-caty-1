@@ -10,9 +10,14 @@ function App() {
   console.log(form);
   return (
     <>
-      <h1>Hello React with Code Catty</h1>
-      <Button />
-      <Input />
+      <h1>Hello Code Caty</h1>
+      <label htmlFor='name'>Name</label>
+      <Input  id='name'/>
+
+      <label htmlFor='email'>Email</label>
+      <Input  id='email'/>
+      
+      <Button>Submit</Button>
       <FormComponent />
     </>
   )

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import Button from "../atoms/button";
-import Input from "../atoms/input";
+import Button from "@atoms/button";
+import Input from "@atoms/input";
 
 const FormComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
