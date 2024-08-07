@@ -1,26 +1,26 @@
-import {useForm} from 'react-hook-form';
+import { useForm } from "react-hook-form";
 
-import Button from './components/atoms/button'
-import Input from './components/atoms/input'
-import FormComponent from './components/molecules/Form'
-import './App.css'
+import Button from "./components/atoms/button";
+import Input from "./components/atoms/input";
+import FormComponent from "./components/molecules/Form";
+import "./App.css";
 
 function App() {
-  const form =useForm();
+  const form = useForm();
   console.log(form);
   return (
     <>
       <h1>Hello Code Caty</h1>
-      <label htmlFor='name'>Name</label>
-      <Input  id='name'/>
+      <label htmlFor="name">Name</label>
+      <Input id="name" />
 
-      <label htmlFor='email'>Email</label>
-      <Input  id='email'/>
-      
+      <label htmlFor="email">Email</label>
+      <Input id="email" />
+
       <Button>Submit</Button>
       <FormComponent />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

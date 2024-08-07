@@ -2,28 +2,29 @@ module.exports = {
   root: true,
   env: { browser: true, es2020: true },
   "settings": {
-  "import/resolver": {
-   "typescript": {
-    "project": ["tsconfig.app.json"]
-   }
-  }
-},
+    "import/resolver": {
+      "typescript": {
+        "project": ["tsconfig.app.json"]
+      }
+    }
+  },
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'plugin:import/recommended'
+    'plugin:import/recommended',
+    'plugin:prettier/recommended'
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'import'],
+  plugins: ['react-refresh', 'import', 'prettier'],
   rules: {
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
     'no-console': 1,
-    'import/order':[
+    'import/order': [
       'error',
       {
         'groups': ['builtin', 'external', 'internal', [
@@ -31,7 +32,14 @@ module.exports = {
           'sibling',
           'index'
         ]],
-        "newlines-between":"always"
+        "newlines-between": "always"
+      }
+    ],
+    "prettier/prettier": [
+      "off",
+      {
+        "endOfLine": "auto",
+        "parser": "flow"
       }
     ]
   },
