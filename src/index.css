@@ -100,3 +100,8 @@ button:focus-visible {
 input {
   width: 90%;
 }
+
+.article {
+  display: flex;
+  width: 90%;
+}
