@@ -13,7 +13,7 @@ interface IUser {
  */
 const UsersList = () => {
   const [users, setUsers] = useState<IUser[]>([]);
-  const [id, setId] = useState<number | null>(null);
+
   // const [counter, setCounter] = useState<number>(0);
 
   useEffect(() => {
@@ -22,11 +22,14 @@ const UsersList = () => {
       .then((data) => setUsers(data?.users));
   }, []);
 
-  useEffect(() => {
+  const fetchUserDeatils = (id: number) => {
+    if (!id) {
+      return;
+    }
     fetch("https://dummyjson.com/users/" + id)
       .then((res) => res.json())
       .then(console.log);
-  }, [id]);
+  };
 
   return (
     <div className="t-white">
@@ -37,12 +40,7 @@ const UsersList = () => {
         <>
           {users?.map((u) => (
             <ul>
-              <li
-                onClick={() => {
-                  setId(u.id);
-                }}
-                key={u.id}
-              >
+              <li onClick={() => fetchUserDeatils(u?.id)} key={u.id}>
                 {u.firstName}
               </li>
             </ul>
