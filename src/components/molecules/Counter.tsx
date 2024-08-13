@@ -1,35 +1,26 @@
-import { useState } from "react";
+import { useRef } from "react";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
+import Button from "../atoms/button";
+import Input from "../atoms/input";
+
+const Click = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    inputRef.current?.focus();
+  };
 
   return (
-    <div className="flex justify-center ">
-      <button
-        onClick={() => {
-          setCount((count) => count - 1);
-        }}
-      >
-        Decrement
-      </button>
+    <div className="t-white">
+      <input ref={inputRef} />
 
-      <p className="t-white px--2">Count: {count}</p>
+      <Input label="Name" ref={inputRef} />
 
-      <button
-        onClick={() => {
-          setCount((count) => count + 1);
-        }}
-      >
-        Increment
-      </button>
+      <Button className="mx-2" onClick={handleClick}>
+        Click
+      </Button>
     </div>
   );
 };
 
-export default Counter;
-// ```
-// Don’t call Hooks inside loops, conditions, or nested functions.
-
-// Don’t call Hooks from regular JavaScript functions.
-
-// ```;
+export default Click;

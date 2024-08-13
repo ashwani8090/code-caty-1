@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-body{
+body {
   background-color: #080a1be9;
 }
 
@@ -45,15 +45,18 @@ body{
   color: #888;
 }
 
-
-label{
+label {
   color: #ffff;
 }
-input{
+input {
   padding: 10px;
   margin: 10px;
 }
 
-h1{
+h1 {
   color: #ffff;
+}
+
+.mx-2 {
+  margin-inline: 10px;
 }
