@@ -12,9 +12,29 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.list-wrapper {
+  color: #000;
+  height: 100vh;
+  width: 50%;
+  border-radius: 5px;
+  padding: 10;
+}
+
 .heading {
   background-color: #242424;
   color: white;
+}
+
+.dark-bg {
+  background-color: #242424;
+}
+
+.list {
+  background-color: #eb7b11;
+}
+
+.w-100 {
+  width: 100%;
 }
 
 a {
@@ -101,8 +121,19 @@ button:focus-visible {
   padding-inline: 2rem;
 }
 
-input {
+.p-2 {
+  padding: 16px;
+}
+
+.input {
   width: 90%;
+  border-radius: 5px;
+  border: 1px solid;
+  font-size: larger;
+}
+.label {
+  font-size: 1.2rem;
+  padding-left: 10px;
 }
 
 .article {

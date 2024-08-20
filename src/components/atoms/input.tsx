@@ -12,8 +12,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     return (
       <div className="flex flex-col align-start">
-        <label htmlFor={id}>{label}</label>
-        <input ref={ref} id={id} {...props} />
+        <label className="label" htmlFor={id}>
+          {label}
+        </label>
+        <input className="input" ref={ref} id={id} {...props} />
       </div>
     );
   },

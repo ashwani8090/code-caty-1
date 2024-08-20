@@ -1,13 +1,8 @@
 import "./App.css";
-import MultiStepForm from "./components/molecules/Stepper";
-import FormProvider from "./contexts/FormProvider";
+import Users from "./pages/Users";
 
 function App() {
-  return (
-    <FormProvider>
-      <MultiStepForm />
-    </FormProvider>
-  );
+  return <Users />;
 }
 
 export default App;
