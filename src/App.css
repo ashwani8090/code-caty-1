@@ -1,59 +1,32 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* Regular (400) */
+@font-face {
+  font-family: "Dancing";
+  src: url("/public/fonts/Dancing/DancingScript-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
 }
 
-body{
-  background-color: #080a1be9;
+/* Medium (500) */
+@font-face {
+  font-family: "Dancing";
+  src: url("/public/fonts/Dancing/DancingScript-Medium.ttf");
+
+  font-weight: 500;
+  font-style: normal;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* SemiBold (600) */
+@font-face {
+  font-family: "Dancing";
+  src: url("/public/fonts/Dancing/DancingScript-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-
-label{
-  color: #ffff;
-}
-input{
-  padding: 10px;
-  margin: 10px;
-}
-
-h1{
-  color: #ffff;
+/* Bold (700) */
+@font-face {
+  font-family: "Dancing";
+  src: url("/public/fonts/Poppins/Poppins-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
 }

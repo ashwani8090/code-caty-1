@@ -1,25 +1,28 @@
 import { useForm } from "react-hook-form";
 
 import Button from "./components/atoms/button";
-import Input from "./components/atoms/input";
-import FormComponent from "./components/molecules/Form";
 import "./App.css";
+import Message from "./components/atoms/message";
 
 function App() {
   const form = useForm();
   console.log(form);
   return (
-    <>
-      <h1>Hello Code Caty</h1>
-      <label htmlFor="name">Name</label>
-      <Input id="name" />
-
-      <label htmlFor="email">Email</label>
-      <Input id="email" />
-
-      <Button>Submit</Button>
-      <FormComponent />
-    </>
+    <div className="min-h-screen flex flex-col w-screen">
+      <div className="p-2 space-x-2 flex">
+        <Button>Submit</Button>
+        <Button variant="danger">Submit</Button>
+        <Button variant="secondary">Submit</Button>
+      </div>
+      <div className="p-2 space-x-2 flex">
+        <Message type="success" message="Your operation was successful!" />
+        <Message
+          type="danger"
+          message="Something went wrong. Please try again."
+        />
+        <Message type="info" message="This is some informational message." />
+      </div>
+    </div>
   );
 }
 
