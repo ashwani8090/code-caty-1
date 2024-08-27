@@ -5,7 +5,8 @@ const Button: React.FC<
     variant?: "primary" | "secondary" | "danger";
   }
 > = ({ variant = "primary", ...props }) => {
-  const baseClasses = "px-4 py-2 rounded font-semibold focus:outline-none";
+  const baseClasses =
+    "px-4 py-2 rounded font-semibold focus:outline-none bg-red";
   const variantClasses = {
     primary: "bg-primary text-white hover:bg-blue-600",
     secondary: "bg-secondary text-white hover:bg-gray-600",
@@ -14,7 +15,7 @@ const Button: React.FC<
 
   return (
     <button
-      className={`font-bold text-[12px] ${baseClasses} ${variantClasses[variant]}`}
+      className={`bg-red text-[12px] font-bold hover:mx-1 focus:my-2 sm:mx-2 md:mx-2 ${baseClasses} ${variantClasses[variant]}`}
       {...props}
     />
   );
