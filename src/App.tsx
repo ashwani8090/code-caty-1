@@ -8,7 +8,7 @@ function App() {
   console.log(form);
   return (
     <CenteredLayout>
-      <div className="flex w-[200px]"></div>
+      <div className="flex space-x-4"></div>
     </CenteredLayout>
   );
 }
