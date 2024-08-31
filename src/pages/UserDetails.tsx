@@ -1,7 +1,10 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useForm, Controller, SubmitHandler, Control } from "react-hook-form";
 
 import { Button } from "@/components/atoms/button";
-import { Card } from "@/components/atoms/card";
+import { Card, CardHeader } from "@/components/atoms/card";
 import { Input } from "@/components/atoms/input";
 
 interface FormData {
@@ -12,144 +15,111 @@ interface FormData {
   confirmPassword: string;
 }
 
-interface Errors {
-  firstName?: string;
-  lastName?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
+interface FieldProps {
+  control: Control<FormData>;
+  name: keyof FormData;
+  label: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  errors: Partial<Record<keyof FormData, any>>;
 }
 
+const Field: React.FC<FieldProps> = ({ control, name, label, errors }) => {
+  return (
+    <div className="mb-4">
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <Input
+            {...field}
+            label={label}
+            className={`w-full border p-2 ${
+              errors[name] ? "border-red-500" : "border-gray-300"
+            }`}
+            placeholder={label}
+          />
+        )}
+      />
+      {errors[name] && (
+        <p className="text-sm text-red-500">{errors[name]?.message}</p>
+      )}
+    </div>
+  );
+};
+
+const schema = yup.object().shape({
+  firstName: yup.string().required("First Name is required"),
+  lastName: yup.string().required("Last Name is required"),
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Passwords must match")
+    .required("Confirm Password is required"),
+});
+
 const UserProfileForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+  const {
+    control,
+    handleSubmit,
+    getValues,
+    formState: { errors },
+    setValue,
+  } = useForm<FormData>({
+    resolver: yupResolver(schema),
+    mode: "onChange",
+    defaultValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
-  const [errors, setErrors] = useState<Errors>({});
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData({
-      ...formData,
-      [id]: value,
-    });
-  };
-
-  const validate = (): Errors => {
-    const newErrors: Errors = {};
-
-    if (!formData.firstName) newErrors.firstName = "First name is required";
-    if (!formData.lastName) newErrors.lastName = "Last name is required";
-    if (!formData.email) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Invalid email format";
-    }
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters long";
-    }
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Confirm Password is required";
-    } else if (formData.confirmPassword !== formData.password) {
-      newErrors.confirmPassword = "Passwords must match";
-    }
-
-    return newErrors;
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-    } else {
-      setErrors({});
-      console.log("Form data:", formData);
-      alert("Profile updated successfully!");
-      // Perform your submit logic here, e.g., sending data to an API
-    }
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    console.log("data: ", data);
+    setValue("lastName", "Singh");
   };
 
   return (
-    <Card className="w-screen max-w-md">
-      <form onSubmit={handleSubmit} className="p-4 shadow-lg">
-        <div className="mb-4">
-          <Input
-            name="firstName"
-            label="First Name"
-            value={formData.firstName}
-            onChange={handleChange}
-            className={`w-full border p-2 ${errors.firstName ? "border-red-500" : "border-gray-300"}`}
-            placeholder="First Name"
-          />
-          {errors.firstName && (
-            <p className="text-sm text-red-500">{errors.firstName}</p>
-          )}
-        </div>
+    <Card className="w-screen max-w-sm">
+      <CardHeader className="rounded-md bg-slate-600 text-sm text-white">
+        {JSON.stringify(getValues(), null, 2)}
+      </CardHeader>
+      <form onSubmit={handleSubmit(onSubmit)} className="p-4 shadow-lg">
+        <Field
+          control={control}
+          errors={errors}
+          name="firstName"
+          label="First Name"
+        />
 
-        <div className="mb-4">
-          <Input
-            name="lastName"
-            label="Last Name"
-            value={formData.lastName}
-            onChange={handleChange}
-            className={`w-full border p-2 ${errors.lastName ? "border-red-500" : "border-gray-300"}`}
-            placeholder="Last Name"
-          />
-          {errors.lastName && (
-            <p className="text-sm text-red-500">{errors.lastName}</p>
-          )}
-        </div>
+        <Field
+          control={control}
+          errors={errors}
+          name="lastName"
+          label="Last Name"
+        />
 
-        <div className="mb-4">
-          <Input
-            name="email"
-            label="Email"
-            value={formData.email}
-            onChange={handleChange}
-            className={`w-full border p-2 ${errors.email ? "border-red-500" : "border-gray-300"}`}
-            placeholder="Email"
-          />
-          {errors.email && (
-            <p className="text-sm text-red-500">{errors.email}</p>
-          )}
-        </div>
+        <Field control={control} errors={errors} name="email" label="Email" />
 
-        <div className="mb-4">
-          <Input
-            type="password"
-            name="password"
-            label="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className={`w-full border p-2 ${errors.password ? "border-red-500" : "border-gray-300"}`}
-            placeholder="Password"
-          />
-          {errors.password && (
-            <p className="text-sm text-red-500">{errors.password}</p>
-          )}
-        </div>
+        <Field
+          control={control}
+          errors={errors}
+          name="password"
+          label="Password"
+        />
 
-        <div className="mb-4">
-          <Input
-            type="password"
-            name="confirmPassword"
-            label="Confirm Password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            className={`w-full border p-2 ${errors.confirmPassword ? "border-red-500" : "border-gray-300"}`}
-            placeholder="Confirm Password"
-          />
-          {errors.confirmPassword && (
-            <p className="text-sm text-red-500">{errors.confirmPassword}</p>
-          )}
-        </div>
+        <Field
+          control={control}
+          errors={errors}
+          name="confirmPassword"
+          label="Confirm Password"
+        />
 
         <Button type="submit">Update Profile</Button>
       </form>
