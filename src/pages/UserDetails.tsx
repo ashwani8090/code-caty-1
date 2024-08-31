@@ -65,7 +65,6 @@ const UserProfileForm: React.FC = () => {
   const {
     control,
     handleSubmit,
-    getValues,
     formState: { errors },
     setValue,
   } = useForm<FormData>({
@@ -86,44 +85,59 @@ const UserProfileForm: React.FC = () => {
   };
 
   return (
-    <Card className="w-screen max-w-sm">
-      <CardHeader className="rounded-md bg-slate-600 text-sm text-white">
-        {JSON.stringify(getValues(), null, 2)}
-      </CardHeader>
-      <form onSubmit={handleSubmit(onSubmit)} className="p-4 shadow-lg">
-        <Field
-          control={control}
-          errors={errors}
-          name="firstName"
-          label="First Name"
-        />
+    <div className="flex w-screen">
+      <div className="hidden w-1/2 flex-col items-center justify-center p-10 md:flex">
+        <h1 className="text-2xl font-bold">Welcome To Code Caty</h1>
+        <img src="/public/signup.svg" className="size-96" />
+      </div>
+      <div className="w-full max-w-full p-5 md:w-1/2 md:max-w-sm md:p-0">
+        <Card className="w-full">
+          <CardHeader className="rounded-t-md bg-primary text-lg text-white">
+            Register
+          </CardHeader>
+          <form onSubmit={handleSubmit(onSubmit)} className="p-4 shadow-lg">
+            <Field
+              control={control}
+              errors={errors}
+              name="firstName"
+              label="First Name"
+            />
 
-        <Field
-          control={control}
-          errors={errors}
-          name="lastName"
-          label="Last Name"
-        />
+            <Field
+              control={control}
+              errors={errors}
+              name="lastName"
+              label="Last Name"
+            />
 
-        <Field control={control} errors={errors} name="email" label="Email" />
+            <Field
+              control={control}
+              errors={errors}
+              name="email"
+              label="Email"
+            />
 
-        <Field
-          control={control}
-          errors={errors}
-          name="password"
-          label="Password"
-        />
+            <Field
+              control={control}
+              errors={errors}
+              name="password"
+              label="Password"
+            />
 
-        <Field
-          control={control}
-          errors={errors}
-          name="confirmPassword"
-          label="Confirm Password"
-        />
+            <Field
+              control={control}
+              errors={errors}
+              name="confirmPassword"
+              label="Confirm Password"
+            />
 
-        <Button type="submit">Update Profile</Button>
-      </form>
-    </Card>
+            <Button type="submit" className="w-full">
+              Register
+            </Button>
+          </form>
+        </Card>
+      </div>
+    </div>
   );
 };
 

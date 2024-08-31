@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        "primary": "#1A1D23",
+        "primary": "#6C63FF",
       },
       keyframes: {
         "accordion-down": {
@@ -35,5 +35,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [import("tailwindcss-animate")],
 }
