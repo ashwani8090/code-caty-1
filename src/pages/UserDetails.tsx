@@ -1,11 +1,11 @@
 import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useForm, Controller, SubmitHandler, Control } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { Button } from "@/components/atoms/button";
-import { Card, CardHeader } from "@/components/atoms/card";
-import { Input } from "@/components/atoms/input";
+import { Card, CardContent, CardHeader } from "@/components/molecules/card";
+import FormBuilder from "@/components/molecules/FormBuilder";
 
 interface FormData {
   firstName: string;
@@ -14,38 +14,6 @@ interface FormData {
   password: string;
   confirmPassword: string;
 }
-
-interface FieldProps {
-  control: Control<FormData>;
-  name: keyof FormData;
-  label: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  errors: Partial<Record<keyof FormData, any>>;
-}
-
-const Field: React.FC<FieldProps> = ({ control, name, label, errors }) => {
-  return (
-    <div className="mb-4">
-      <Controller
-        name={name}
-        control={control}
-        render={({ field }) => (
-          <Input
-            {...field}
-            label={label}
-            className={`w-full border p-2 ${
-              errors[name] ? "border-red-500" : "border-gray-300"
-            }`}
-            placeholder={label}
-          />
-        )}
-      />
-      {errors[name] && (
-        <p className="text-sm text-red-500">{errors[name]?.message}</p>
-      )}
-    </div>
-  );
-};
 
 const schema = yup.object().shape({
   firstName: yup.string().required("First Name is required"),
@@ -62,12 +30,7 @@ const schema = yup.object().shape({
 });
 
 const UserProfileForm: React.FC = () => {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-  } = useForm<FormData>({
+  const form = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
     defaultValues: {
@@ -81,7 +44,6 @@ const UserProfileForm: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log("data: ", data);
-    setValue("lastName", "Singh");
   };
 
   return (
@@ -95,7 +57,50 @@ const UserProfileForm: React.FC = () => {
           <CardHeader className="rounded-t-md bg-primary text-lg text-white">
             Register
           </CardHeader>
-          <form onSubmit={handleSubmit(onSubmit)} className="p-4 shadow-lg">
+          <CardContent>
+            <FormBuilder
+              form={form}
+              onSubmit={onSubmit}
+              fields={[
+                {
+                  name: "firstName",
+                  label: "First Name",
+                  type: "text",
+                  required: true,
+                },
+                {
+                  name: "lastName",
+                  label: "Last Name",
+                  type: "text",
+                  required: true,
+                },
+                {
+                  name: "email",
+                  label: "Email",
+                  type: "text",
+                  required: true,
+                },
+                {
+                  name: "password",
+                  label: "Password",
+                  type: "password",
+                  required: true,
+                },
+                {
+                  name: "confirmPassword",
+                  label: "Confirm Password",
+                  type: "password",
+                  required: true,
+                },
+              ]}
+            >
+              <Button type="submit" className="w-full">
+                Register
+              </Button>
+            </FormBuilder>
+          </CardContent>
+
+          {/* <form onSubmit={handleSubmit(onSubmit)} className="p-4 shadow-lg">
             <Field
               control={control}
               errors={errors}
@@ -134,7 +139,7 @@ const UserProfileForm: React.FC = () => {
             <Button type="submit" className="w-full">
               Register
             </Button>
-          </form>
+          </form> */}
         </Card>
       </div>
     </div>

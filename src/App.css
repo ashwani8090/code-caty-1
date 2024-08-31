@@ -30,3 +30,8 @@
   font-weight: 700;
   font-style: normal;
 }
+
+.required::after {
+  content: " *";
+  color: red;
+}

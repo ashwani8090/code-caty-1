@@ -5,13 +5,17 @@ import { cn } from "src/utils/index";
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  required?: boolean;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, name, type, ...props }, ref) => {
+  ({ className, label, name, required, type, ...props }, ref) => {
     return (
       <>
-        <label htmlFor={name} className="block text-sm font-bold text-gray-700">
+        <label
+          htmlFor={name}
+          className={`block text-sm font-bold text-gray-700 ${required && "required"}`}
+        >
           {label}
         </label>
         <input
