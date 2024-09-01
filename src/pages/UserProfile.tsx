@@ -39,7 +39,7 @@ const UserProfile = () => {
       {/* Profile Section */}
       {user && (
         <div className="flex items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
-          <div className="w-full max-w-4xl rounded-lg bg-white p-8 text-gray-800 shadow-lg">
+          <div className="w-full max-w-4xl rounded-lg bg-black p-8 text-gray-800 shadow-lg">
             {/* Profile Image */}
             <div className="-mt-24 flex justify-center">
               <img
@@ -51,11 +51,11 @@ const UserProfile = () => {
 
             {/* User Information */}
             <div className="mt-6 text-center">
-              <h2 className="text-3xl font-bold">
+              <h2 className="text-3xl font-bold text-white">
                 {user.firstName} {user.lastName}
               </h2>
 
-              <p className="text-gray-600">{user.username}</p>
+              <p className="text-white">{user.username}</p>
               <div className="mt-2 flex justify-center space-x-4">
                 <span className="rounded-full bg-blue-500 px-4 py-2 text-sm text-white">
                   Age: {user.age}
@@ -68,8 +68,8 @@ const UserProfile = () => {
 
             {/* About Section */}
             <div className="mt-6">
-              <h3 className="text-lg font-semibold">About</h3>
-              <p className="mt-2 text-gray-600">
+              <h3 className="text-lg font-semibold text-sky-400">About</h3>
+              <p className="mt-2 text-white">
                 {user.about ||
                   "Passionate software engineer with a focus on creating scalable web applications. Specializes in front-end development using React and Tailwind CSS."}
               </p>
@@ -78,15 +78,17 @@ const UserProfile = () => {
             {/* Contact Information */}
             <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <h3 className="text-lg font-semibold">Contact Information</h3>
-                <p className="mt-2 text-gray-600">Email: {user.email}</p>
-                <p className="text-gray-600">
+                <h3 className="text-lg font-semibold text-sky-400">
+                  Contact Information
+                </h3>
+                <p className="mt-2 text-white">Email: {user.email}</p>
+                <p className="text-white">
                   Phone: {user.phone || "Not available"}
                 </p>
               </div>
               <div>
-                <h3 className="text-lg font-semibold">Location</h3>
-                <p className="mt-2 text-gray-600">
+                <h3 className="text-lg font-semibold text-sky-400">Location</h3>
+                <p className="mt-2 text-white">
                   {user.address?.city}, {user.address?.state}
                 </p>
               </div>
