@@ -1,27 +1,11 @@
-import { useEffect, useState } from "react";
-import { getCookie, removeCookie } from "react-use-cookie";
+import { removeCookie } from "react-use-cookie";
 
 import { Button } from "@/components/atoms/button";
 
 const UserProfile = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [user, setUser] = useState<any>(null);
-
-  useEffect(() => {
-    // Fetching user data from the API
-    fetch("https://dummyjson.com/auth/me", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + getCookie("token"),
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setUser(data))
-      .catch((err) => console.error("Error fetching user data:", err));
-  }, []);
+  const user: any = {};
 
   const logout = () => {
-    // Clearing the token cookie
     removeCookie("token");
   };
 

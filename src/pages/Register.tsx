@@ -91,9 +91,9 @@ const Register: React.FC = () => {
               Register
             </Button>
           </FormBuilder>
-          <div className="py-2 text-sm">
+          <div className="flex items-center justify-center py-2 text-sm">
             Already have an account? &nbsp;
-            <a className="text-primary" href="/register">
+            <a className="text-primary" href="/auth/login">
               Login
             </a>
           </div>
