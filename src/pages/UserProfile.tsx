@@ -20,10 +20,6 @@ const UserProfile = () => {
       .catch((err) => console.error("Error fetching user data:", err));
   }, []);
 
-  if (!user) {
-    return <div>Loading...</div>; // Loading state while data is being fetched
-  }
-
   const logout = () => {
     // Clearing the token cookie
     removeCookie("token");
@@ -36,84 +32,90 @@ const UserProfile = () => {
         <h1 className="text-3xl font-bold">User Profile</h1>
       </header>
 
+      {!user && (
+        <div className="flex items-center justify-center p-10">Loading...</div>
+      )}
+
       {/* Profile Section */}
-      <div className="flex items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
-        <div className="w-full max-w-4xl rounded-lg bg-white p-8 text-gray-800 shadow-lg">
-          {/* Profile Image */}
-          <div className="-mt-24 flex justify-center">
-            <img
-              src={user.image}
-              alt="Profile"
-              className="h-40 w-40 rounded-full border-4 border-white object-cover"
-            />
-          </div>
-
-          {/* User Information */}
-          <div className="mt-6 text-center">
-            <h2 className="text-3xl font-bold">
-              {user.firstName} {user.lastName}
-            </h2>
-
-            <p className="text-gray-600">{user.username}</p>
-            <div className="mt-2 flex justify-center space-x-4">
-              <span className="rounded-full bg-blue-500 px-4 py-2 text-sm text-white">
-                Age: {user.age}
-              </span>
-              <span className="rounded-full bg-blue-500 px-4 py-2 text-sm text-white">
-                Gender: {user.gender}
-              </span>
+      {user && (
+        <div className="flex items-center justify-center px-4 py-20 sm:px-6 lg:px-8">
+          <div className="w-full max-w-4xl rounded-lg bg-white p-8 text-gray-800 shadow-lg">
+            {/* Profile Image */}
+            <div className="-mt-24 flex justify-center">
+              <img
+                src={user.image}
+                alt="Profile"
+                className="h-40 w-40 rounded-full border-4 border-white object-cover"
+              />
             </div>
-          </div>
 
-          {/* About Section */}
-          <div className="mt-6">
-            <h3 className="text-lg font-semibold">About</h3>
-            <p className="mt-2 text-gray-600">
-              {user.about ||
-                "Passionate software engineer with a focus on creating scalable web applications. Specializes in front-end development using React and Tailwind CSS."}
-            </p>
-          </div>
+            {/* User Information */}
+            <div className="mt-6 text-center">
+              <h2 className="text-3xl font-bold">
+                {user.firstName} {user.lastName}
+              </h2>
 
-          {/* Contact Information */}
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <h3 className="text-lg font-semibold">Contact Information</h3>
-              <p className="mt-2 text-gray-600">Email: {user.email}</p>
-              <p className="text-gray-600">
-                Phone: {user.phone || "Not available"}
-              </p>
+              <p className="text-gray-600">{user.username}</p>
+              <div className="mt-2 flex justify-center space-x-4">
+                <span className="rounded-full bg-blue-500 px-4 py-2 text-sm text-white">
+                  Age: {user.age}
+                </span>
+                <span className="rounded-full bg-blue-500 px-4 py-2 text-sm text-white">
+                  Gender: {user.gender}
+                </span>
+              </div>
             </div>
-            <div>
-              <h3 className="text-lg font-semibold">Location</h3>
+
+            {/* About Section */}
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold">About</h3>
               <p className="mt-2 text-gray-600">
-                {user.address?.city}, {user.address?.state}
+                {user.about ||
+                  "Passionate software engineer with a focus on creating scalable web applications. Specializes in front-end development using React and Tailwind CSS."}
               </p>
             </div>
-          </div>
 
-          {/* Social Media Links */}
-          <div className="mt-6 flex justify-center space-x-4">
-            {user.socialLinks?.facebook && (
-              <a href={user.socialLinks.facebook} className="text-blue-500">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-            )}
-            {user.socialLinks?.twitter && (
-              <a href={user.socialLinks.twitter} className="text-blue-400">
-                <i className="fab fa-twitter"></i>
-              </a>
-            )}
-            {user.socialLinks?.instagram && (
-              <a href={user.socialLinks.instagram} className="text-pink-600">
-                <i className="fab fa-instagram"></i>
-              </a>
-            )}
+            {/* Contact Information */}
+            <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <h3 className="text-lg font-semibold">Contact Information</h3>
+                <p className="mt-2 text-gray-600">Email: {user.email}</p>
+                <p className="text-gray-600">
+                  Phone: {user.phone || "Not available"}
+                </p>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold">Location</h3>
+                <p className="mt-2 text-gray-600">
+                  {user.address?.city}, {user.address?.state}
+                </p>
+              </div>
+            </div>
+
+            {/* Social Media Links */}
+            <div className="mt-6 flex justify-center space-x-4">
+              {user.socialLinks?.facebook && (
+                <a href={user.socialLinks.facebook} className="text-blue-500">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+              )}
+              {user.socialLinks?.twitter && (
+                <a href={user.socialLinks.twitter} className="text-blue-400">
+                  <i className="fab fa-twitter"></i>
+                </a>
+              )}
+              {user.socialLinks?.instagram && (
+                <a href={user.socialLinks.instagram} className="text-pink-600">
+                  <i className="fab fa-instagram"></i>
+                </a>
+              )}
+            </div>
+            <Button onClick={logout} variant={"destructive"}>
+              Logout
+            </Button>
           </div>
-          <Button onClick={logout} variant={"destructive"}>
-            Logout
-          </Button>
         </div>
-      </div>
+      )}
     </div>
   );
 };
