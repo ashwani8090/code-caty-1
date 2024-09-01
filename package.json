@@ -20,10 +20,13 @@
     "eslint-plugin-import": "^2.29.1",
     "lucide-react": "^0.436.0",
     "react": "^18.3.1",
+    "react-cookie": "^7.2.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.0",
+    "react-use-cookie": "^1.6.1",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "universal-cookie": "^7.2.0",
     "vite-tsconfig-paths": "^4.3.2",
     "yup": "^1.4.0"
   },

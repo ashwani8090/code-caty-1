@@ -1,14 +1,8 @@
-import CenteredLayout from "@components/templates/CenteredLayout";
-
 import "./App.css";
-import UserProfileForm from "./pages/UserDetails";
+import Login from "./pages/Login";
 
 function App() {
-  return (
-    <CenteredLayout>
-      <UserProfileForm />
-    </CenteredLayout>
-  );
+  return <Login />;
 }
 
 export default App;

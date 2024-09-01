@@ -1,3 +1,5 @@
+import defaultTheme from 'tailwindcss/defaultTheme'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
@@ -16,6 +18,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        'sans': ['"Poppins"', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         "primary": "#6C63FF",
       },
