@@ -1,69 +1,16 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
-  Navigate,
-  Outlet,
   Route,
-  useOutletContext,
 } from "react-router-dom";
 
 import Login from "@pages/Login";
 import Register from "@pages/Register";
 import UserProfile from "@/pages/UserProfile";
-import { useAuth } from "@/hooks/useAuth";
 
-const Root = () => {
-  const { loading, user, setUser } = useAuth();
-  if (loading) return <div>Loading...</div>;
-
-  return (
-    <Outlet
-      context={{
-        loading,
-        user,
-        setUser,
-      }}
-    />
-  );
-};
-
-const PublicRoute = () => {
-  const { user, loading, setUser } = useOutletContext<any>();
-  if (loading) return <div>Loading...</div>;
-
-  if (user) {
-    return <Navigate to="/home" replace />;
-  }
-
-  return (
-    <Outlet
-      context={{
-        user,
-        loading,
-        setUser,
-      }}
-    />
-  );
-};
-
-const PrivateRoute = () => {
-  const { user, loading, setUser } = useOutletContext<any>();
-  if (loading) return <div>Loading...</div>;
-
-  if (!user) {
-    return <Navigate to="/auth/login" replace />;
-  }
-
-  return (
-    <Outlet
-      context={{
-        user,
-        loading,
-        setUser,
-      }}
-    />
-  );
-};
+import PublicRoute from "./PublicRoute";
+import PrivateRoute from "./PrivateRoute";
+import Root from "./Root";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
