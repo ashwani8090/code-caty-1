@@ -1,13 +1,11 @@
 import "./App.css";
-import { getCookie } from "react-use-cookie";
 
-import Login from "./pages/Login";
-import UserProfile from "./pages/UserProfile";
+import { RouterProvider } from "react-router-dom";
+
+import { router } from "./routes";
 
 function App() {
-  const token = getCookie("token");
-
-  return <div className="App">{token ? <UserProfile /> : <Login />}</div>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

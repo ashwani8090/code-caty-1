@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Loader2 } from "lucide-react";
 import { setCookie } from "react-use-cookie";
-// import { useOutletContext } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 import { Button } from "@/components/atoms/button";
 import FormBuilder from "@/components/molecules/FormBuilder";
@@ -24,7 +24,7 @@ const schema = yup.object().shape({
 });
 
 const Login: React.FC = () => {
-  // const { setUser } = useOutletContext<any>();
+  const { setUser } = useOutletContext<any>();
 
   const [loading, setloading] = useState(false);
   const form = useForm<FormData>({
@@ -50,7 +50,7 @@ const Login: React.FC = () => {
       .then((data) => {
         setloading(false);
         setCookie("token", data?.token);
-        // setUser(data);
+        setUser(data);
       });
   };
 
@@ -84,9 +84,9 @@ const Login: React.FC = () => {
           </FormBuilder>
           <div className="flex items-center justify-center py-2 text-sm">
             Don't have account? &nbsp;
-            <a className="text-primary" href="/auth/register">
+            <Link className="text-primary" to="/auth/register">
               Register
-            </a>
+            </Link>
           </div>
         </div>
       </div>

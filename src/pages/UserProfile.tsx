@@ -1,12 +1,14 @@
 import { removeCookie } from "react-use-cookie";
+import { useOutletContext } from "react-router-dom";
 
 import { Button } from "@/components/atoms/button";
 
 const UserProfile = () => {
-  const user: any = {};
+  const { user, setUser } = useOutletContext<any>();
 
   const logout = () => {
     removeCookie("token");
+    setUser(null);
   };
 
   return (

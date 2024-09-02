@@ -2,6 +2,7 @@ import React from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/atoms/button";
 import FormBuilder from "@/components/molecules/FormBuilder";
@@ -93,9 +94,9 @@ const Register: React.FC = () => {
           </FormBuilder>
           <div className="flex items-center justify-center py-2 text-sm">
             Already have an account? &nbsp;
-            <a className="text-primary" href="/auth/login">
+            <Link className="text-primary" to="/auth/login">
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </div>

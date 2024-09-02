@@ -28,6 +28,7 @@
       "@components/*": ["src/components/*"],
       "@atoms/*": ["src/components/atoms/*"],
       "@molecules/*": ["src/components/molecules/*"],
+      "@pages/*": ["src/pages/*"],
       "@templates/*": ["src/components/templates/*"],
       "@constants/*": ["src/constants/*"],
       "@hooks/*": ["src/hooks/*"],
