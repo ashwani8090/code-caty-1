@@ -1,10 +1,13 @@
 import { removeCookie } from "react-use-cookie";
-import { useOutletContext } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/atoms/button";
+import { AuthContext } from "@/contexts/AuthProvider";
 
 const UserProfile = () => {
-  const { user, setUser } = useOutletContext<any>();
+  const { user, setUser } = useContext(AuthContext);
 
   const logout = () => {
     removeCookie("token");
@@ -37,10 +40,11 @@ const UserProfile = () => {
 
             {/* User Information */}
             <div className="mt-6 text-center">
-              <h2 className="text-3xl font-bold text-white">
-                {user.firstName} {user.lastName}
-              </h2>
-
+              <Link to="/portfolio/basic">
+                <h2 className="text-3xl font-bold text-white">
+                  {user.firstName} {user.lastName}
+                </h2>
+              </Link>
               <p className="text-white">{user.username}</p>
               <div className="mt-2 flex justify-center space-x-4">
                 <span className="rounded-full bg-blue-500 px-4 py-2 text-sm text-white">

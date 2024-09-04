@@ -18,6 +18,7 @@ export default {
       },
     },
     extend: {
+
       fontFamily: {
         'sans': ['"Poppins"', ...defaultTheme.fontFamily.sans],
       },
@@ -25,6 +26,13 @@ export default {
         "primary": "#6C63FF",
       },
       keyframes: {
+        'border-beam-circular': {
+          '0%': { borderColor: 'transparent transparent transparent indigo' },
+          '25%': { borderColor: 'indigo transparent transparent transparent' },
+          '50%': { borderColor: 'transparent indigo transparent transparent' },
+          '75%': { borderColor: 'transparent transparent indigo transparent' },
+          '100%': { borderColor: 'transparent transparent transparent indigo' },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -35,6 +43,7 @@ export default {
         },
       },
       animation: {
+        'border-beam-circular': 'border-beam-circular 4s linear infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

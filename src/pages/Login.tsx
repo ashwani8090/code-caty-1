@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Loader2 } from "lucide-react";
 import { setCookie } from "react-use-cookie";
-import { Link, useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Button } from "@/components/atoms/button";
 import FormBuilder from "@/components/molecules/FormBuilder";
 import AuthLayout from "@/components/templates/AuthLayout";
+import { AuthContext } from "@/contexts/AuthProvider";
 
 interface FormData {
   username: string;
@@ -24,7 +25,7 @@ const schema = yup.object().shape({
 });
 
 const Login: React.FC = () => {
-  const { setUser } = useOutletContext<any>();
+  const { setUser } = useContext(AuthContext);
 
   const [loading, setloading] = useState(false);
   const form = useForm<FormData>({

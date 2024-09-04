@@ -1,22 +1,17 @@
-import { Navigate, Outlet, useOutletContext } from "react-router-dom";
+import { useContext } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 
-const PublicRoute = () => {
-  const { user, loading, setUser } = useOutletContext<any>();
-  if (loading) return <div>Loading...</div>;
+import { AuthContext } from "@/contexts/AuthProvider";
 
-  if (user) {
+export const PublicRoute = () => {
+  const { user, loading, token } = useContext(AuthContext);
+
+  if (loading) {
+    return <div>loading...</div>;
+  }
+  if (user && token) {
     return <Navigate to="/home" replace />;
   }
 
-  return (
-    <Outlet
-      context={{
-        user,
-        loading,
-        setUser,
-      }}
-    />
-  );
+  return <Outlet />;
 };
-
-export default PublicRoute;
