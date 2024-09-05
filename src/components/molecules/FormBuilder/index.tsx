@@ -28,6 +28,7 @@ interface IField {
   label: string;
   type: "text" | "password";
   required: boolean;
+  className?: string;
 }
 
 export interface IFormBuilder<T extends FieldValues> {

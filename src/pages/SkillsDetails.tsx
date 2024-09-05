@@ -34,6 +34,13 @@ const SkillDetails = () => {
             label: "Hobbies",
             required: true,
           },
+          {
+            name: "summary",
+            label: "Summary",
+            required: true,
+            type: "text",
+            className: "h-[100px]",
+          },
         ]}
         onSubmit={() => {}}
       >

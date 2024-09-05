@@ -8,9 +8,16 @@ export interface FieldProps {
   label: string;
   required: boolean;
   type: string;
+  className?: string;
 }
 
-const Field: React.FC<FieldProps> = ({ name, label, type, required }) => {
+const Field: React.FC<FieldProps> = ({
+  name,
+  label,
+  type,
+  required,
+  ...props
+}) => {
   const {
     control,
     formState: { errors },
@@ -23,10 +30,11 @@ const Field: React.FC<FieldProps> = ({ name, label, type, required }) => {
         render={({ field }) => (
           <Input
             {...field}
+            {...props}
             label={label}
             className={`w-full border p-2 ${
               errors[name] ? "border-red-500" : "border-gray-300"
-            }`}
+            } ${props?.className}`}
             placeholder={label}
             required={required}
             type={type}
