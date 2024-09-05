@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { Avatar, AvatarImage } from "@/components/atoms/avatar";
 import { AuthContext } from "@/contexts/AuthProvider";
@@ -40,9 +41,11 @@ const Portfolio = () => {
 
   return (
     <div className="max-h-screen w-full overflow-auto bg-gray-900 p-8">
-      <h1 className="mb-8 text-center text-5xl font-bold text-white">
-        Professional Portfolio
-      </h1>
+      <Link to={"/portfolio/basic"}>
+        <h1 className="mb-8 text-center text-5xl font-bold text-white">
+          My Portfolio
+        </h1>
+      </Link>
 
       <div className="mx-auto max-w-3xl space-y-8 rounded-lg bg-gray-800 p-8 text-left shadow-xl">
         <section className="flex justify-between">
