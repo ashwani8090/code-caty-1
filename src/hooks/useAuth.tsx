@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCookie } from "react-use-cookie";
+import { getCookie, removeCookie } from "react-use-cookie";
 
 export const useAuth = () => {
   const token = getCookie("token");
@@ -10,27 +10,33 @@ export const useAuth = () => {
   useEffect(() => {
     if (token) {
       setLoading(true);
-
-      fetch("https://dummyjson.com/auth/me", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error("Failed to fetch user data");
-          }
-          return res.json();
+      try {
+        fetch("https://dummyjson.com/auth/me", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
-        .then((data) => {
-          setUser(data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setUser(null);
-          setLoading(false);
-        });
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Failed to fetch user data");
+            }
+            return res.json();
+          })
+          .then((data) => {
+            setUser(data);
+            setLoading(false);
+          })
+          .catch(() => {
+            setUser(null);
+            setLoading(false);
+            removeCookie("token");
+          });
+      } catch (e) {
+        setUser(null);
+        setLoading(false);
+        removeCookie("token");
+      }
     }
   }, [token]);
 

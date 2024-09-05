@@ -7,9 +7,13 @@ import {
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import UserProfile from "@/pages/UserProfile";
+import BasicDetails from "@/pages/BasicDetails";
+import ContactDetails from "@/pages/ContactDetails";
+import SkillDetails from "@/pages/SkillsDetails";
+import PortfolioLayout from "@/components/templates/PortfolioLayout";
 
-import { PublicRoute } from "./PublicRoute";
 import { PrivateRoute } from "./PrivateRoute";
+import { PublicRoute } from "./PublicRoute";
 
 export const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +25,12 @@ export const routes = createBrowserRouter(
 
       <Route path="/" element={<PrivateRoute />}>
         <Route path="home" element={<UserProfile />} />
+
+        <Route path="portfolio" element={<PortfolioLayout />}>
+          <Route path="basic" element={<BasicDetails />} />
+          <Route path="contact" element={<ContactDetails />} />
+          <Route path="skills" element={<SkillDetails />} />
+        </Route>
       </Route>
     </Route>,
   ),

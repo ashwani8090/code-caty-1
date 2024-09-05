@@ -22,6 +22,18 @@ const SkillDetails = () => {
             label: "Skills",
             required: true,
           },
+          {
+            type: "text",
+            name: "languages",
+            label: "Languages",
+            required: true,
+          },
+          {
+            type: "text",
+            name: "hobbies",
+            label: "Hobbies",
+            required: true,
+          },
         ]}
         onSubmit={() => {}}
       >

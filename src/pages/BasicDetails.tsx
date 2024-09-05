@@ -11,7 +11,7 @@ const BasicDetails = () => {
     navigate("/portfolio/contact");
   };
   return (
-    <div className="w-full">
+    <div className="h-screen w-full overflow-auto py-10">
       <h1 className="mb-4 text-3xl font-bold text-primary">Basic Details</h1>
       <FormBuilder
         form={form}
@@ -28,16 +28,41 @@ const BasicDetails = () => {
             label: "Last Name",
             required: true,
           },
+
           {
             type: "text",
-            name: "mother_name",
-            label: "Mother's Name",
+            name: "birth_date",
+            label: "Birth Date",
             required: true,
           },
           {
             type: "text",
-            name: "father_name",
-            label: "Father's Name",
+            name: "gender",
+            label: "Gender",
+            required: true,
+          },
+          {
+            type: "text",
+            name: "nationality",
+            label: "Nationality",
+            required: true,
+          },
+          {
+            type: "text",
+            name: "marital_status",
+            label: "Marital Status",
+            required: false,
+          },
+          {
+            type: "text",
+            name: "occupation",
+            label: "Occupation",
+            required: true,
+          },
+          {
+            type: "text",
+            name: "company",
+            label: "Company",
             required: true,
           },
         ]}

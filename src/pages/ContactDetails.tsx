@@ -28,13 +28,13 @@ const ContactDetails = () => {
           {
             type: "text",
             name: "phone_number",
-            label: "Phone",
+            label: "Phone Number",
             required: true,
           },
           {
             type: "text",
             name: "line",
-            label: "Address line",
+            label: "Address Line",
             required: true,
           },
           {
