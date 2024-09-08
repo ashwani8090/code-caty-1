@@ -1,11 +1,18 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 import FormBuilder from "@/components/molecules/FormBuilder";
 import { Button } from "@/components/atoms/button";
+import { setContactDetails } from "@/store/userSlice";
 
 const ContactDetails = () => {
-  const form = useForm();
+  const data = useSelector((state: any) => state.portfolio.contactDetails);
+  const dispatch = useDispatch();
+
+  const form = useForm({
+    defaultValues: data,
+  });
   const navigate = useNavigate();
   const previous = () => {
     navigate(-1);
@@ -18,6 +25,9 @@ const ContactDetails = () => {
       <h1 className="mb-4 text-3xl font-bold text-primary">Contact Details</h1>
       <FormBuilder
         form={form}
+        onValueChange={(name, value) => {
+          dispatch(setContactDetails({ ...data, [name]: value }));
+        }}
         fields={[
           {
             type: "text",

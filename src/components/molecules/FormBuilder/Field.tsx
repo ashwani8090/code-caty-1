@@ -9,6 +9,7 @@ export interface FieldProps {
   required: boolean;
   type: string;
   className?: string;
+  onValueChange?: (field: string, value: any) => void;
 }
 
 const Field: React.FC<FieldProps> = ({
@@ -38,6 +39,12 @@ const Field: React.FC<FieldProps> = ({
             placeholder={label}
             required={required}
             type={type}
+            onChange={(e) => {
+              field.onChange(e);
+              if (props?.onValueChange) {
+                props?.onValueChange(name, e.target.value);
+              }
+            }}
           />
         )}
       />

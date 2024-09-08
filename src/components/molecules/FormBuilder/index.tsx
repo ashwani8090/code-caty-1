@@ -36,15 +36,20 @@ export interface IFormBuilder<T extends FieldValues> {
   onSubmit: (data: T) => void;
   form: UseFormReturn<T>;
   children?: ReactNode;
+  onValueChange?: (field: string, value: any) => void;
 }
 
 const FormBuilder = <T extends FieldValues>(_props: IFormBuilder<T>) => {
-  const { fields, form, onSubmit, children } = _props;
+  const { fields, form, onSubmit, children, onValueChange } = _props;
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         {fields?.map((field, index) => (
-          <Field key={`${field.name}-${index}`} {...field} />
+          <Field
+            key={`${field.name}-${index}`}
+            {...field}
+            onValueChange={onValueChange}
+          />
         ))}
         {children}
       </form>

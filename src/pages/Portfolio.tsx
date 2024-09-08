@@ -3,31 +3,12 @@ import { Link } from "react-router-dom";
 
 import { Avatar, AvatarImage } from "@/components/atoms/avatar";
 import { AuthContext } from "@/contexts/AuthProvider";
+import { usePortfolio } from "@/hooks/usePotfolio";
 
 const Portfolio = () => {
   const { user } = useContext(AuthContext);
 
-  const data = {
-    first_name: "John",
-    last_name: "Doe",
-    mother_name: "Jane Doe",
-    father_name: "Richard Doe",
-    email: "john.doe@example.com",
-    phone_number: "+1234567890",
-    line: "123 Main St",
-    city: "Springfield",
-    country: "USA",
-    birth_date: "January 1, 1990",
-    gender: "Male",
-    nationality: "American",
-    marital_status: "Single",
-    occupation: "Software Engineer",
-    company: "Tech Corp",
-    skills: ["JavaScript", "React", "Node.js", "CSS", "HTML"],
-    languages: ["English", "Spanish"],
-    hobbies: ["Coding", "Reading", "Traveling"],
-    image: "https://via.placeholder.com/150", // Dummy image URL
-  };
+  const data = usePortfolio();
 
   const [image, setImage] = useState(user?.image);
 
@@ -101,16 +82,7 @@ const Portfolio = () => {
             Professional Summary
           </h3>
           <p className="text-md text-gray-400">
-            I am a dedicated{" "}
-            <strong className="text-gray-200">Software Engineer</strong> with a
-            passion for building efficient, scalable web applications. I
-            currently work at{" "}
-            <span className="font-semibold text-indigo-400">
-              {data.company}
-            </span>
-            , where I specialize in full-stack development using modern
-            technologies like JavaScript, React, and Node.js. I bring over a
-            decade of experience in tech and am committed to lifelong learning.
+            {<div dangerouslySetInnerHTML={{ __html: data?.summary }} />}
           </p>
         </section>
 
@@ -119,7 +91,7 @@ const Portfolio = () => {
         <section>
           <h3 className="mb-2 text-2xl font-semibold text-white">Skills</h3>
           <ul className="text-md grid list-inside list-disc grid-cols-2 gap-4 text-gray-400">
-            {data.skills.map((skill, index) => (
+            {data.skills.map((skill: string, index: number) => (
               <li key={index} className="flex items-center">
                 <span>💡 {skill}</span>
               </li>
@@ -132,7 +104,7 @@ const Portfolio = () => {
         <section>
           <h3 className="mb-2 text-2xl font-semibold text-white">Languages</h3>
           <ul className="text-md list-inside list-disc text-gray-400">
-            {data.languages.map((language, index) => (
+            {data.languages.map((language: string, index: number) => (
               <li key={index}>🌐 {language}</li>
             ))}
           </ul>
@@ -143,7 +115,7 @@ const Portfolio = () => {
         <section>
           <h3 className="mb-2 text-2xl font-semibold text-white">Hobbies</h3>
           <ul className="text-md list-inside list-disc text-gray-400">
-            {data.hobbies.map((hobby, index) => (
+            {data.hobbies.map((hobby: string, index: number) => (
               <li key={index}>🎯 {hobby}</li>
             ))}
           </ul>

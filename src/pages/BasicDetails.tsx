@@ -1,11 +1,17 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import FormBuilder from "@/components/molecules/FormBuilder";
 import { Button } from "@/components/atoms/button";
+import { setBasicDetails } from "@/store/userSlice";
 
 const BasicDetails = () => {
-  const form = useForm();
+  const dispatch = useDispatch();
+  const data = useSelector((state: any) => state.portfolio.basicDetails);
+  const form = useForm({
+    defaultValues: data,
+  });
   const navigate = useNavigate();
   const next = () => {
     navigate("/portfolio/contact");
@@ -15,6 +21,9 @@ const BasicDetails = () => {
       <h1 className="mb-4 text-3xl font-bold text-primary">Basic Details</h1>
       <FormBuilder
         form={form}
+        onValueChange={(name, value) => {
+          dispatch(setBasicDetails({ ...data, [name]: value }));
+        }}
         fields={[
           {
             type: "text",
