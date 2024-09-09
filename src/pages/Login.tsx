@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -10,6 +10,7 @@ import { Button } from "@/components/atoms/button";
 import FormBuilder from "@/components/molecules/FormBuilder";
 import AuthLayout from "@/components/templates/AuthLayout";
 import { AuthContext } from "@/contexts/AuthProvider";
+import { useLoginMutation } from "@/api/user";
 
 interface FormData {
   username: string;
@@ -25,9 +26,9 @@ const schema = yup.object().shape({
 });
 
 const Login: React.FC = () => {
+  const [login, { isLoading }] = useLoginMutation();
   const { setUser } = useContext(AuthContext);
 
-  const [loading, setloading] = useState(false);
   const form = useForm<FormData>({
     resolver: yupResolver(schema),
     mode: "onChange",
@@ -38,21 +39,12 @@ const Login: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    setloading(true);
-    fetch("https://dummyjson.com/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...data,
-        expiresInMins: 30, // optional, defaults to 60
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setloading(false);
-        setCookie("token", data?.token);
-        setUser(data);
-      });
+    login({
+      ...data,
+    }).then(({ data }: any) => {
+      setCookie("token", data?.token);
+      setUser(data);
+    });
   };
 
   return (
@@ -79,7 +71,7 @@ const Login: React.FC = () => {
             ]}
           >
             <Button type="submit" className="w-full">
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Login
             </Button>
           </FormBuilder>

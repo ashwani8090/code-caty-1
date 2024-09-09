@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 
 import { Button } from "@/components/atoms/button";
 import { AuthContext } from "@/contexts/AuthProvider";
+import { useGetUsersQuery } from "@/api/user";
 
 const UserProfile = () => {
+  const { data } = useGetUsersQuery(null);
+  console.log("data: ", data);
   const { user, setUser } = useContext(AuthContext);
 
   const logout = () => {
