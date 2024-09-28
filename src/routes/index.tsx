@@ -12,6 +12,7 @@ import SkillDetails from "@/pages/SkillsDetails";
 import PortfolioLayout from "@/components/templates/PortfolioLayout";
 import UserProfile from "@/pages/UserProfile";
 import ProductList from "@/pages/Products";
+import UserList from "@/pages/Users";
 
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
@@ -28,6 +29,7 @@ export const routes = createBrowserRouter(
         <Route index element={<UserProfile />} />
         <Route path="home" element={<UserProfile />} />
         <Route path="products" element={<ProductList />} />
+        <Route path="users" element={<UserList />} />
 
         <Route path="portfolio" element={<PortfolioLayout />}>
           <Route path="basic" element={<BasicDetails />} />
