@@ -42,7 +42,7 @@ const Login: React.FC = () => {
     login({
       ...data,
     }).then(({ data }: any) => {
-      setCookie("token", data?.token);
+      setCookie("token", data?.accessToken);
       setUser(data);
     });
   };
@@ -50,6 +50,7 @@ const Login: React.FC = () => {
   return (
     <AuthLayout>
       <div className="w-full">
+        <span className="icon-alarm text-4xl text-red-500" />
         <h2 className="text-3xl font-bold text-primary">Sign In to CodeCaty</h2>
         <div className="py-5">
           <FormBuilder
