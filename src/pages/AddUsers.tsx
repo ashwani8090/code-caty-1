@@ -5,12 +5,13 @@ interface UserRow {
   firstName: string;
   lastName: string;
   email: string;
+  errors?: { firstName?: string; lastName?: string; email?: string }; // Add errors property
 }
 
 const AddUsersTable: React.FC = () => {
   // State to hold user rows
   const [rows, setRows] = useState<UserRow[]>([
-    { firstName: "", lastName: "", email: "" },
+    { firstName: "", lastName: "", email: "", errors: {} },
   ]);
 
   // Handle input changes
@@ -25,7 +26,7 @@ const AddUsersTable: React.FC = () => {
 
   // Add a new row
   const addRow = () => {
-    setRows([...rows, { firstName: "", lastName: "", email: "" }]);
+    setRows([...rows, { firstName: "", lastName: "", email: "", errors: {} }]);
   };
 
   // Delete a specific row
@@ -34,13 +35,29 @@ const AddUsersTable: React.FC = () => {
     setRows(newRows);
   };
 
+  // Validate form data
+  const validateRows = () => {
+    const newRows = rows.map((row) => {
+      const errors: { firstName?: string; lastName?: string; email?: string } =
+        {};
+      if (!row.firstName) errors.firstName = "First name is required.";
+      if (!row.lastName) errors.lastName = "Last name is required.";
+      if (!row.email) errors.email = "Email is required.";
+      return { ...row, errors };
+    });
+    setRows(newRows);
+    return newRows.every((row) => Object.keys(row.errors || {}).length === 0);
+  };
+
   // Handle form submission
   const handleSubmit = () => {
-    console.log("Submitted Data:", rows);
+    if (validateRows()) {
+      console.log("Submitted Data:", rows);
+    }
   };
 
   return (
-    <div className="container h-screen bg-gray-900">
+    <div className="container h-full min-h-screen bg-gray-900">
       <header className="py-5">
         <span className="text-2xl text-white">Add User</span>
       </header>
@@ -81,7 +98,13 @@ const AddUsersTable: React.FC = () => {
                     value={row.firstName}
                     onChange={(event) => handleInputChange(index, event)}
                     className="rounded border border-gray-500 bg-gray-800 p-1 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="First Name"
                   />
+                  {row.errors?.firstName && (
+                    <span className="mt-1 block text-sm text-red-500">
+                      {row.errors.firstName}
+                    </span>
+                  )}
                 </td>
                 <td className="border border-gray-600 px-4 py-2">
                   <input
@@ -90,7 +113,13 @@ const AddUsersTable: React.FC = () => {
                     value={row.lastName}
                     onChange={(event) => handleInputChange(index, event)}
                     className="rounded border border-gray-500 bg-gray-800 p-1 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Last Name"
                   />
+                  {row.errors?.lastName && (
+                    <span className="mt-1 block text-sm text-red-500">
+                      {row.errors.lastName}
+                    </span>
+                  )}
                 </td>
                 <td className="border border-gray-600 px-4 py-2">
                   <input
@@ -99,7 +128,13 @@ const AddUsersTable: React.FC = () => {
                     value={row.email}
                     onChange={(event) => handleInputChange(index, event)}
                     className="rounded border border-gray-500 bg-gray-800 p-1 text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Email"
                   />
+                  {row.errors?.email && (
+                    <span className="mt-1 block text-sm text-red-500">
+                      {row.errors.email}
+                    </span>
+                  )}
                 </td>
                 <td className="border border-gray-600 px-4 py-2">
                   <button
