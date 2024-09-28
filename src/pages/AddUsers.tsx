@@ -187,14 +187,14 @@ const AddUsersTable: React.FC = () => {
                     )}
                 </td>
                 <td className="border border-gray-600 px-4 py-2">
-                  <button
+                  <div
                     onClick={() => {
                       deleteRow(index);
                     }}
-                    className="rounded bg-red-500 px-4 py-1 text-sm text-white transition duration-200 hover:bg-red-600"
+                    className="w-20 rounded bg-red-500 px-4 py-1 text-sm text-white transition duration-200 hover:bg-red-600"
                   >
                     Delete
-                  </button>
+                  </div>
                 </td>
               </tr>
             ))}
