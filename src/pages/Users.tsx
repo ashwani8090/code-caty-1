@@ -1,8 +1,40 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import { Button } from "@/components/atoms/button";
 
 const UsersList = () => {
-  const users: any[] = [];
-  const addUser = () => {};
+  const client = useQueryClient();
+  const { data: users } = useQuery({
+    queryKey: ["users"],
+    queryFn: () => {
+      // fetch data from API
+      return fetch("https://dummyjson.com/users").then((r) => r.json());
+    },
+    select(data) {
+      return data?.users;
+    },
+  });
+
+  const { mutate: addUserAPI } = useMutation({
+    mutationFn: (data: any) => {
+      return fetch("https://dummyjson.com/users/add", {
+        method: "POST",
+        body: JSON.stringify(data),
+      }).then(() => {
+        client.invalidateQueries({
+          queryKey: ["users"],
+        });
+      });
+    },
+  });
+
+  const addUser = () => {
+    addUserAPI({
+      firstName: "Ashwani",
+      lastName: "SINGH",
+      age: 250,
+    });
+  };
   return (
     <div className="container mx-auto h-full min-h-screen bg-black bg-gradient-to-t text-white">
       <header className="flex justify-between p-5">
