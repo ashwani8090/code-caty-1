@@ -155,7 +155,8 @@ const AddUsersTable: React.FC = () => {
                       {row.errors.lastName}
                     </span>
                   )} */}
-                  {formState?.touchedFields?.users?.[index]?.lastName &&
+                  {(formState?.isSubmitted ||
+                    formState?.touchedFields?.users?.[index]?.lastName) &&
                     formState?.errors?.users?.[index]?.lastName?.message && (
                       <span className="mt-1 block text-sm text-red-500">
                         {formState?.errors?.users?.[index]?.lastName?.message}
@@ -177,7 +178,8 @@ const AddUsersTable: React.FC = () => {
                       {row.errors.email}
                     </span>
                   )} */}
-                  {formState?.touchedFields?.users?.[index]?.email &&
+                  {(formState?.isSubmitted ||
+                    formState?.touchedFields?.users?.[index]?.email) &&
                     formState?.errors?.users?.[index]?.email?.message && (
                       <span className="mt-1 block text-sm text-red-500">
                         {formState?.errors?.users?.[index]?.email?.message}
